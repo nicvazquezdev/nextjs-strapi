@@ -1,3 +1,8 @@
+export interface GraphQLResponse<T> {
+  data: T;
+  errors?: { message: string }[];
+}
+
 export type TechnologyItem = {
   title: string;
   slug: string;
@@ -11,5 +16,13 @@ export type TechnologyItem = {
 
 export type TechnologyDetail = TechnologyItem & {
   description: string;
+  image?: { url: string | null };
+};
+
+export type TechnologyDetailResponse = Omit<TechnologyDetail, "image"> & {
+  image?: { url: string | null };
+};
+
+export type TechnologyResponse = Omit<TechnologyItem, "image"> & {
   image?: { url: string | null };
 };

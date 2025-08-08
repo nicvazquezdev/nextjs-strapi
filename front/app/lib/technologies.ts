@@ -1,5 +1,10 @@
 import { gql } from "./strapi";
-import { TechnologyDetail, TechnologyItem } from "./types";
+import {
+  TechnologyDetail,
+  TechnologyDetailResponse,
+  TechnologyItem,
+  TechnologyResponse,
+} from "./types";
 
 const BASE = process.env.STRAPI_BASE_URL as string;
 
@@ -24,7 +29,9 @@ export async function getTechnologies(): Promise<TechnologyItem[]> {
       }
     }
   `;
-  const { technologies } = await gql<{ technologies: any[] }>(query);
+  const { technologies } = await gql<{ technologies: TechnologyResponse[] }>(
+    query,
+  );
   return technologies.map((a) => ({
     title: a.title,
     slug: a.slug,
@@ -69,7 +76,9 @@ export async function getTechnologyBySlug(
       }
     }
   `;
-  const { technologies } = await gql<{ technologies: any[] }>(query, { slug });
+  const { technologies } = await gql<{
+    technologies: TechnologyDetailResponse[];
+  }>(query, { slug });
   const a = technologies[0];
   if (!a) return null;
   return {
