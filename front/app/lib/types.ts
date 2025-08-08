@@ -10,18 +10,18 @@ export type TechnologyItem = {
   category: string;
   maturityLevel: string;
   publishedAt: string;
-  image?: { url: string | null };
+  image: { url: string };
 };
 
 export type TechnologyDetail = TechnologyItem & {
   description: string;
-  image?: { url: string | null };
+  image: { url: string };
 };
 
 export type TechnologyDetailResponse = Omit<TechnologyDetail, "image"> & {
-  image?: { url: string | null };
+  image: { url: string };
 };
 
 export type TechnologyResponse = Omit<TechnologyItem, "image"> & {
-  image?: { url: string | null };
+  image: { url: string };
 };

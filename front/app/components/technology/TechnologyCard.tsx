@@ -17,7 +17,7 @@ export function TechnologyCard({ technology }: TechnologyCardProps) {
         className="grid grid-cols-[120px,1fr] gap-6 items-start"
       >
         <TechnologyImage
-          src={technology.image?.url}
+          src={technology.image.url}
           alt={technology.title}
           className="w-30 h-30"
         />

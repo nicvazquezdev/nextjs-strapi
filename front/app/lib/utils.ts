@@ -11,15 +11,18 @@ export function cn(...inputs: ClassValue[]) {
 /**
  * Format date to a readable string
  */
-export function formatDate(date: string | Date, options?: Intl.DateTimeFormatOptions): string {
+export function formatDate(
+  date: string | Date,
+  options?: Intl.DateTimeFormatOptions,
+): string {
   const dateObj = typeof date === "string" ? new Date(date) : date;
-  
+
   const defaultOptions: Intl.DateTimeFormatOptions = {
     month: "short",
     day: "numeric",
     year: "numeric",
   };
-  
+
   return dateObj.toLocaleDateString("en-US", { ...defaultOptions, ...options });
 }
 
@@ -33,8 +36,7 @@ export function clamp(value: number, min: number, max: number): number {
 /**
  * Normalize image URL with base URL if needed
  */
-export function normalizeImageUrl(url?: string | null, baseUrl?: string): string | null {
-  if (!url) return null;
+export function normalizeImageUrl(url: string, baseUrl?: string): string {
   if (url.startsWith("http")) return url;
   if (!baseUrl) return url;
   return `${baseUrl}${url}`;

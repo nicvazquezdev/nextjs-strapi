@@ -65,7 +65,7 @@ function transformTechnologyResponse(
     category: technology.category,
     maturityLevel: technology.maturityLevel,
     publishedAt: technology.publishedAt,
-    image: { url: normalizeImageUrl(technology.image?.url, BASE_URL) },
+    image: { url: normalizeImageUrl(technology.image.url, BASE_URL) },
   };
 }
 
