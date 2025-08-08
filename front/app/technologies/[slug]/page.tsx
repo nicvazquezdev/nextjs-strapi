@@ -27,43 +27,79 @@ export default async function TechnologyPage({ params }: Props) {
   const tech = await getTechnologyBySlug(params.slug);
   if (!tech) return notFound();
 
+  const getImpactColor = (score: number) => {
+    if (score >= 80) return "bg-green-500";
+    if (score >= 60) return "bg-blue-500";
+    if (score >= 40) return "bg-yellow-500";
+    return "bg-gray-400";
+  };
+
   return (
-    <article className="prose prose-neutral max-w-none">
-      <div className="not-prose space-y-3 mb-6">
-        <h1 className="text-3xl font-bold tracking-tight">{tech.title}</h1>
-        <div className="text-sm text-gray-500">
-          {new Date(tech.publishedAt).toLocaleDateString()}
+    <article className="max-w-4xl mx-auto">
+      <div className="space-y-6 mb-8">
+        <div className="space-y-4">
+          <h1 className="text-4xl font-bold tracking-tight text-foreground sm:text-5xl">
+            {tech.title}
+          </h1>
+          <div className="flex items-center gap-4 text-sm text-muted-foreground">
+            <time>
+              {new Date(tech.publishedAt).toLocaleDateString('en-US', { 
+                month: 'long', 
+                day: 'numeric',
+                year: 'numeric'
+              })}
+            </time>
+          </div>
         </div>
-        <div className="flex items-center gap-2 text-sm">
-          <span className="inline-flex items-center rounded-full border px-2.5 py-0.5">
+        
+        <div className="flex flex-wrap items-center gap-3">
+          <span className="inline-flex items-center rounded-full bg-accent px-3 py-1 text-sm font-medium text-accent-foreground">
             {tech.category}
           </span>
-          <span className="inline-flex items-center rounded-full border px-2.5 py-0.5">
+          <span className="inline-flex items-center rounded-full bg-muted px-3 py-1 text-sm font-medium text-muted-foreground">
             {tech.maturityLevel}
           </span>
-          <span className="inline-flex items-center rounded-full border px-2.5 py-0.5">
-            Impact {tech.impactScore}
-          </span>
+          <div className="flex items-center gap-2">
+            <span className="text-sm font-medium text-foreground">Impact:</span>
+            <div className="flex items-center gap-2">
+              <div className="h-2 w-16 rounded-full bg-muted">
+                <div
+                  className={`h-2 rounded-full ${getImpactColor(tech.impactScore)}`}
+                  style={{ width: `${Math.min(Math.max(tech.impactScore, 0), 100)}%` }}
+                />
+              </div>
+              <span className="text-sm font-medium text-foreground">{tech.impactScore}%</span>
+            </div>
+          </div>
         </div>
       </div>
 
       {tech.image?.url && (
-        <div className="not-prose mb-6">
-          <Image
-            src={tech.image.url}
-            alt={tech.title}
-            width={1200}
-            height={630}
-            className="w-full h-auto rounded-xl object-cover"
-          />
+        <div className="mb-8">
+          <div className="relative overflow-hidden rounded-xl border border-border">
+            <Image
+              src={tech.image.url}
+              alt={tech.title}
+              width={1200}
+              height={630}
+              className="w-full h-auto object-cover"
+            />
+          </div>
         </div>
       )}
 
-      <p className="text-lg text-gray-800">{tech.shortDescription}</p>
-      <div
-        className="mt-6"
-        dangerouslySetInnerHTML={{ __html: tech.description }}
-      />
+      <div className="space-y-6">
+        <p className="text-xl leading-relaxed text-muted-foreground">
+          {tech.shortDescription}
+        </p>
+        
+        <div className="border-t border-border pt-6">
+          <div
+            className="prose prose-neutral prose-lg max-w-none prose-headings:text-foreground prose-p:text-muted-foreground prose-strong:text-foreground prose-a:text-accent hover:prose-a:text-accent/80"
+            dangerouslySetInnerHTML={{ __html: tech.description }}
+          />
+        </div>
+      </div>
     </article>
   );
 }

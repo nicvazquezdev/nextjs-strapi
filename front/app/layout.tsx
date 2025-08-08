@@ -15,10 +15,12 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className="bg-white text-gray-900 antialiased">
-        <Header />
-        {children}
-        <Footer />
+      <body className="min-h-screen bg-background text-foreground antialiased">
+        <div className="flex min-h-screen flex-col">
+          <Header />
+          <div className="flex-1 mx-auto max-w-6xl px-6 py-8">{children}</div>
+          <Footer />
+        </div>
       </body>
     </html>
   );
