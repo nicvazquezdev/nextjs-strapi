@@ -1,26 +1,11 @@
 import { TechnologyItem } from "@/app/lib/types";
 import { TechnologyCard } from "./TechnologyCard";
-import { LoadingCard } from "@/app/components/ui/LoadingSpinner";
 
 export interface TechnologyListProps {
   technologies: TechnologyItem[];
-  isLoading?: boolean;
 }
 
-export function TechnologyList({
-  technologies,
-  isLoading,
-}: TechnologyListProps) {
-  if (isLoading) {
-    return (
-      <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-1">
-        {Array.from({ length: 3 }).map((_, i) => (
-          <LoadingCard key={i} />
-        ))}
-      </div>
-    );
-  }
-
+export function TechnologyList({ technologies }: TechnologyListProps) {
   if (technologies.length === 0) {
     return (
       <div className="flex min-h-[400px] flex-col items-center justify-center space-y-4 text-center">
