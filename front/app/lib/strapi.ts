@@ -5,17 +5,24 @@ export async function gql<T>(
   query: string,
   variables?: Record<string, unknown>,
 ): Promise<T> {
+  if (!URL) throw new Error("Missing STRAPI_GRAPHQL_URL");
+  if (!TOKEN) throw new Error("Missing STRAPI_API_TOKEN");
   const res = await fetch(URL, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
       Authorization: `Bearer ${TOKEN}`,
+      "x-apollo-operation-name": "Op",
     },
     body: JSON.stringify({ query, variables }),
     next: { revalidate: 60 },
   });
-  if (!res.ok) throw new Error(`GraphQL ${res.status}`);
-  const data = await res.json();
-  if (data.errors) throw new Error(JSON.stringify(data.errors));
-  return data.data;
+  const text = await res.text();
+  let json: any = null;
+  try {
+    json = JSON.parse(text);
+  } catch {}
+  if (!res.ok) throw new Error(`GraphQL ${res.status}: ${text}`);
+  if (json?.errors) throw new Error(JSON.stringify(json.errors));
+  return json.data;
 }
