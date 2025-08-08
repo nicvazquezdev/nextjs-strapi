@@ -1,11 +1,12 @@
 import Footer from "./components/Footer";
 import Header from "./components/Header";
+import { ErrorBoundary } from "./components/ui/ErrorBoundary";
+import { APP_CONFIG } from "./lib/constants";
 import "./globals.css";
 
 export const metadata = {
-  title: "Next Big Things",
-  description:
-    "A minimal catalog of emerging technologies powered by Strapi GraphQL",
+  title: APP_CONFIG.name,
+  description: APP_CONFIG.description,
 };
 
 export default function RootLayout({
@@ -18,7 +19,9 @@ export default function RootLayout({
       <body className="min-h-screen bg-background text-foreground antialiased">
         <div className="flex min-h-screen flex-col">
           <Header />
-          <div className="flex-1 mx-auto max-w-6xl px-6 py-8">{children}</div>
+          <main className="flex-1 mx-auto max-w-6xl px-6 py-8">
+            <ErrorBoundary>{children}</ErrorBoundary>
+          </main>
           <Footer />
         </div>
       </body>

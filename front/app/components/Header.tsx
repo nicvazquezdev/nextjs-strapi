@@ -1,5 +1,7 @@
 import Link from "next/link";
 import React from "react";
+import { Navigation } from "./layout/Navigation";
+import { APP_CONFIG, ROUTES } from "@/app/lib/constants";
 
 export default function Header() {
   return (
@@ -7,7 +9,7 @@ export default function Header() {
       <div className="mx-auto max-w-6xl px-6">
         <div className="flex h-16 items-center justify-between">
           <Link
-            href="/"
+            href={ROUTES.home}
             className="flex items-center space-x-2 text-xl font-bold tracking-tight text-foreground transition-colors hover:text-accent"
           >
             <div className="h-8 w-8 rounded-lg bg-accent flex items-center justify-center">
@@ -15,16 +17,9 @@ export default function Header() {
                 N
               </span>
             </div>
-            <span>Next Big Things</span>
+            <span>{APP_CONFIG.name}</span>
           </Link>
-          <nav className="flex items-center space-x-6">
-            <Link
-              href="/technologies"
-              className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground focus-visible:text-foreground"
-            >
-              Technologies
-            </Link>
-          </nav>
+          <Navigation />
         </div>
       </div>
     </header>
