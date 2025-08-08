@@ -1,6 +1,5 @@
 import { TechnologyDetail as TechnologyDetailType } from "@/app/lib/types";
 import { Badge } from "@/app/components/ui/Badge";
-import { ImpactScore } from "@/app/components/ui/ImpactScore";
 import { TechnologyImage } from "./TechnologyImage";
 import { formatDate } from "@/app/lib/utils";
 import { DATE_FORMATS } from "@/app/lib/constants";
@@ -19,7 +18,11 @@ export function TechnologyDetail({ technology }: TechnologyDetailProps) {
   );
 }
 
-function TechnologyDetailHeader({ technology }: { technology: TechnologyDetailType }) {
+function TechnologyDetailHeader({
+  technology,
+}: {
+  technology: TechnologyDetailType;
+}) {
   return (
     <div className="space-y-6 mb-8">
       <div className="space-y-4">
@@ -27,18 +30,20 @@ function TechnologyDetailHeader({ technology }: { technology: TechnologyDetailTy
           {technology.title}
         </h1>
         <div className="flex items-center gap-4 text-sm text-muted-foreground">
-          <time>
-            {formatDate(technology.publishedAt, DATE_FORMATS.long)}
-          </time>
+          <time>{formatDate(technology.publishedAt, DATE_FORMATS.long)}</time>
         </div>
       </div>
-      
+
       <TechnologyDetailMeta technology={technology} />
     </div>
   );
 }
 
-function TechnologyDetailMeta({ technology }: { technology: TechnologyDetailType }) {
+function TechnologyDetailMeta({
+  technology,
+}: {
+  technology: TechnologyDetailType;
+}) {
   return (
     <div className="flex flex-wrap items-center gap-3">
       <Badge variant="accent" size="lg">
@@ -47,25 +52,15 @@ function TechnologyDetailMeta({ technology }: { technology: TechnologyDetailType
       <Badge variant="secondary" size="lg">
         {technology.maturityLevel}
       </Badge>
-      <div className="flex items-center gap-2">
-        <span className="text-sm font-medium text-foreground">Impact:</span>
-        <div className="flex items-center gap-2">
-          <ImpactScore 
-            score={technology.impactScore} 
-            showLabel={false} 
-            size="lg" 
-            className="w-16"
-          />
-          <span className="text-sm font-medium text-foreground">
-            {technology.impactScore}%
-          </span>
-        </div>
-      </div>
     </div>
   );
 }
 
-function TechnologyDetailImage({ technology }: { technology: TechnologyDetailType }) {
+function TechnologyDetailImage({
+  technology,
+}: {
+  technology: TechnologyDetailType;
+}) {
   if (!technology.image?.url) return null;
 
   return (
@@ -84,13 +79,17 @@ function TechnologyDetailImage({ technology }: { technology: TechnologyDetailTyp
   );
 }
 
-function TechnologyDetailContent({ technology }: { technology: TechnologyDetailType }) {
+function TechnologyDetailContent({
+  technology,
+}: {
+  technology: TechnologyDetailType;
+}) {
   return (
     <div className="space-y-6">
       <p className="text-xl leading-relaxed text-muted-foreground">
         {technology.shortDescription}
       </p>
-      
+
       <div className="border-t border-border pt-6">
         <div
           className="prose prose-neutral prose-lg max-w-none prose-headings:text-foreground prose-p:text-muted-foreground prose-strong:text-foreground prose-a:text-accent hover:prose-a:text-accent/80"

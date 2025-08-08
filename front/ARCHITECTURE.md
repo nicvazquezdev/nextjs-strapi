@@ -39,7 +39,6 @@ app/
 │   ├── ui/              # Reusable UI components
 │   │   ├── Badge.tsx
 │   │   ├── ErrorBoundary.tsx
-│   │   ├── ImpactScore.tsx
 │   │   └── index.ts
 │   ├── Footer.tsx       # Global components
 │   └── Header.tsx
@@ -71,12 +70,6 @@ app/
 - **Features**: Multiple variants (default, secondary, accent), size options
 - **Usage**: Technology categories, maturity levels
 
-#### ImpactScore Component
-
-- **Purpose**: Visual representation of technology impact scores
-- **Features**: Color-coded progress bars, configurable display options
-- **Logic**: Centralized color calculation based on score thresholds
-
 #### ErrorBoundary
 
 - **Purpose**: Graceful error handling
@@ -88,8 +81,8 @@ app/
 #### TechnologyCard
 
 - **Purpose**: Technology list item display
-- **Features**: Hover effects, responsive layout, integrated badges and impact scores
-- **Composition**: Uses Badge, ImpactScore, and TechnologyImage components
+- **Features**: Hover effects, responsive layout and integrated badges
+- **Composition**: Uses Badge and TechnologyImage components
 
 #### TechnologyDetail
 
@@ -168,8 +161,6 @@ app/
 ### Organized Constants
 
 - **APP_CONFIG**: Application metadata
-- **IMPACT_SCORE_THRESHOLDS**: Score categorization
-- **IMPACT_SCORE_COLORS**: Color mappings
 - **DATE_FORMATS**: Date formatting options
 - **ROUTES**: Application routing
 - **API_CONFIG**: API configuration

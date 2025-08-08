@@ -22,13 +22,12 @@ const QUERIES = {
         shortDescription
         category
         maturityLevel
-        impactScore
         publishedAt
         image { url }
       }
     }
   `,
-  
+
   GET_TECHNOLOGY_SLUGS: `
     query GetTechnologySlugs {
       technologies {
@@ -36,7 +35,7 @@ const QUERIES = {
       }
     }
   `,
-  
+
   GET_TECHNOLOGY_BY_SLUG: `
     query GetTechnologyBySlug($slug: String) {
       technologies(filters: { slug: { eq: $slug } }) {
@@ -46,7 +45,6 @@ const QUERIES = {
         description
         category
         maturityLevel
-        impactScore
         publishedAt
         image { url }
       }
@@ -57,14 +55,15 @@ const QUERIES = {
 /**
  * Transform raw technology response to normalized technology item
  */
-function transformTechnologyResponse(technology: TechnologyResponse): TechnologyItem {
+function transformTechnologyResponse(
+  technology: TechnologyResponse,
+): TechnologyItem {
   return {
     title: technology.title,
     slug: technology.slug,
     shortDescription: technology.shortDescription,
     category: technology.category,
     maturityLevel: technology.maturityLevel,
-    impactScore: technology.impactScore,
     publishedAt: technology.publishedAt,
     image: { url: normalizeImageUrl(technology.image?.url, BASE_URL) },
   };
@@ -73,7 +72,9 @@ function transformTechnologyResponse(technology: TechnologyResponse): Technology
 /**
  * Transform raw technology detail response to normalized technology detail
  */
-function transformTechnologyDetailResponse(technology: TechnologyDetailResponse): TechnologyDetail {
+function transformTechnologyDetailResponse(
+  technology: TechnologyDetailResponse,
+): TechnologyDetail {
   return {
     ...transformTechnologyResponse(technology),
     description: technology.description,
@@ -89,10 +90,10 @@ export class TechnologyService {
    */
   static async getTechnologies(): Promise<TechnologyItem[]> {
     try {
-      const { technologies } = await gql<{ technologies: TechnologyResponse[] }>(
-        QUERIES.GET_TECHNOLOGIES
-      );
-      
+      const { technologies } = await gql<{
+        technologies: TechnologyResponse[];
+      }>(QUERIES.GET_TECHNOLOGIES);
+
       return technologies.map(transformTechnologyResponse);
     } catch (error) {
       console.error("Failed to fetch technologies:", error);
@@ -106,9 +107,9 @@ export class TechnologyService {
   static async getAllSlugs(): Promise<string[]> {
     try {
       const { technologies } = await gql<{ technologies: { slug: string }[] }>(
-        QUERIES.GET_TECHNOLOGY_SLUGS
+        QUERIES.GET_TECHNOLOGY_SLUGS,
       );
-      
+
       return technologies.map((t) => t.slug);
     } catch (error) {
       console.error("Failed to fetch technology slugs:", error);
@@ -119,7 +120,9 @@ export class TechnologyService {
   /**
    * Fetch technology by slug
    */
-  static async getTechnologyBySlug(slug: string): Promise<TechnologyDetail | null> {
+  static async getTechnologyBySlug(
+    slug: string,
+  ): Promise<TechnologyDetail | null> {
     try {
       const { technologies } = await gql<{
         technologies: TechnologyDetailResponse[];
@@ -131,7 +134,9 @@ export class TechnologyService {
       return transformTechnologyDetailResponse(technology);
     } catch (error) {
       console.error(`Failed to fetch technology with slug "${slug}":`, error);
-      throw new Error("Unable to load technology details. Please try again later.");
+      throw new Error(
+        "Unable to load technology details. Please try again later.",
+      );
     }
   }
 

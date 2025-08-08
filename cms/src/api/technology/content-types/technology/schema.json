@@ -42,9 +42,6 @@
         "mature"
       ]
     },
-    "impactScore": {
-      "type": "integer"
-    },
     "image": {
       "type": "media",
       "multiple": false,

@@ -4,21 +4,9 @@
 
 export const APP_CONFIG = {
   name: "Next Big Things",
-  description: "A minimal catalog of emerging technologies powered by Strapi GraphQL",
+  description:
+    "A minimal catalog of emerging technologies powered by Strapi GraphQL",
   revalidateTime: 60,
-} as const;
-
-export const IMPACT_SCORE_THRESHOLDS = {
-  high: 80,
-  medium: 60,
-  low: 40,
-} as const;
-
-export const IMPACT_SCORE_COLORS = {
-  high: "bg-green-500",
-  medium: "bg-blue-500",
-  low: "bg-yellow-500",
-  minimal: "bg-gray-400",
 } as const;
 
 export const DATE_FORMATS = {

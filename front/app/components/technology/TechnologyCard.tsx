@@ -1,7 +1,6 @@
 import Link from "next/link";
 import { TechnologyItem } from "@/app/lib/types";
 import { Badge } from "@/app/components/ui/Badge";
-import { ImpactScore } from "@/app/components/ui/ImpactScore";
 import { TechnologyImage } from "./TechnologyImage";
 import { formatDate } from "@/app/lib/utils";
 import { ROUTES } from "@/app/lib/constants";
@@ -22,11 +21,10 @@ export function TechnologyCard({ technology }: TechnologyCardProps) {
           alt={technology.title}
           className="w-30 h-30"
         />
-        
+
         <div className="space-y-4 min-w-0">
           <TechnologyCardHeader technology={technology} />
           <TechnologyCardBadges technology={technology} />
-          <ImpactScore score={technology.impactScore} />
         </div>
       </Link>
     </article>

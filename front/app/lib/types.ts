@@ -9,7 +9,6 @@ export type TechnologyItem = {
   shortDescription: string;
   category: string;
   maturityLevel: string;
-  impactScore: number;
   publishedAt: string;
   image?: { url: string | null };
 };

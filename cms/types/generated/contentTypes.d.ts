@@ -392,7 +392,6 @@ export interface ApiTechnologyTechnology extends Struct.CollectionTypeSchema {
       Schema.Attribute.Private;
     description: Schema.Attribute.RichText;
     image: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
-    impactScore: Schema.Attribute.Integer;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
