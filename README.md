@@ -2,6 +2,9 @@
 
 A full-stack application showcasing the most innovative technologies of the moment, built with Next.js (frontend) and Strapi (CMS/backend).
 
+<img width="1707" height="957" alt="Screenshot 2025-08-31 at 3 00 12 AM" src="https://github.com/user-attachments/assets/e96932c5-69ad-4e3b-8b9f-40cd4261f8f4" />
+
+
 ## 🚀 Project Overview
 
 This project is a web application that displays the latest emerging technologies with detailed information, images, and categorizations. The application is divided into two main parts:
