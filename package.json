@@ -1,0 +1,56 @@
+{
+  "name": "nextjs-strapi",
+  "version": "1.0.0",
+  "description": "Full-stack application showcasing innovative technologies built with Next.js and Strapi",
+  "private": true,
+  "workspaces": [
+    "frontend",
+    "cms"
+  ],
+  "scripts": {
+    "dev": "npm run dev:cms & npm run dev:frontend",
+    "dev:frontend": "cd frontend && npm run dev",
+    "dev:cms": "cd cms && npm run dev",
+    "build": "npm run build:cms && npm run build:frontend",
+    "build:frontend": "cd frontend && npm run build",
+    "build:cms": "cd cms && npm run build",
+    "start": "npm run start:cms & npm run start:frontend",
+    "start:frontend": "cd frontend && npm run start",
+    "start:cms": "cd cms && npm run start",
+    "lint": "npm run lint:frontend",
+    "lint:frontend": "cd frontend && npm run lint",
+    "clean": "npm run clean:frontend && npm run clean:cms",
+    "clean:frontend": "cd frontend && rm -rf .next node_modules/.cache",
+    "clean:cms": "cd cms && rm -rf dist .tmp node_modules/.cache",
+    "install:all": "npm install && npm run install:frontend && npm run install:cms",
+    "install:frontend": "cd frontend && npm install",
+    "install:cms": "cd cms && npm install",
+    "postinstall": "echo 'All dependencies installed successfully! Run npm run dev to start both frontend and backend.'"
+  },
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=8.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/your-username/nextjs-strapi.git"
+  },
+  "keywords": [
+    "nextjs",
+    "strapi",
+    "typescript",
+    "react",
+    "graphql",
+    "tailwindcss",
+    "monorepo",
+    "full-stack",
+    "cms",
+    "headless"
+  ],
+  "author": "Your Name <your.email@example.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/your-username/nextjs-strapi/issues"
+  },
+  "homepage": "https://github.com/your-username/nextjs-strapi#readme"
+}
